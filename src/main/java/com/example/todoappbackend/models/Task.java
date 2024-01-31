@@ -1,5 +1,7 @@
 package com.example.todoappbackend.models;
 
+import java.util.Objects;
+
 public class Task {
 
     private String id;
@@ -24,5 +26,13 @@ public class Task {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id) && Objects.equals(text, task.text);
     }
 }

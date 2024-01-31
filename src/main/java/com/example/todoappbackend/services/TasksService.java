@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 @Service
 public class TasksService {
@@ -29,5 +30,9 @@ public class TasksService {
         Task newTask = new Task(UUID.randomUUID().toString(), taskText);
         taskList.add(newTask);
         return newTask;
-}
+    }
+
+    public void deleteOne(Task task) {
+        taskList.remove(task);
+    }
 }

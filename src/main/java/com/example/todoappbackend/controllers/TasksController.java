@@ -2,6 +2,7 @@ package com.example.todoappbackend.controllers;
 
 import com.example.todoappbackend.models.Task;
 import com.example.todoappbackend.services.TasksService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,13 @@ public class TasksController {
         logger.info("New task text: " + newTask.getText());
 
         return tasksService.addOne(newTask.getText());
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteOne(@RequestBody Task task) {
+        tasksService.deleteOne(task);
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }
