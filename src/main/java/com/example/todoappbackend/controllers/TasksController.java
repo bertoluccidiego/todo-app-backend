@@ -21,6 +21,8 @@ public class TasksController {
 
     @GetMapping
     public List<Task> getAll() {
+        logger.info("Fetching all tasks");
+
         return tasksService.getAll();
     }
 
@@ -32,10 +34,20 @@ public class TasksController {
     }
 
     @DeleteMapping
-    public ResponseEntity deleteOne(@RequestBody Task task) {
-        tasksService.deleteOne(task);
+    public ResponseEntity deleteOne(@RequestParam String taskId) {
+        logger.info("Deleting task with id: " + taskId);
+
+        tasksService.deleteOne(taskId);
         return ResponseEntity
                 .noContent()
                 .build();
+    }
+
+    @PutMapping
+    public Task updateOne(@RequestBody Task updatedTask) {
+        logger.info("Updating the task with id: " + updatedTask.getId()
+                        + " with the text: \"" + updatedTask.getText() + "\"");
+
+        return tasksService.updateOne(updatedTask);
     }
 }
