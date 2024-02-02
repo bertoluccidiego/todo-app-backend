@@ -1,7 +1,7 @@
 package com.example.todoappbackend.controllers;
 
 import com.example.todoappbackend.models.Task;
-import com.example.todoappbackend.services.TasksService;
+import com.example.todoappbackend.repositories.TasksRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,31 +13,35 @@ import java.util.logging.Logger;
 public class TasksController {
 
     private final Logger logger = Logger.getLogger(TasksController.class.getName());
-    private final TasksService tasksService;
+    private final TasksRepository tasksRepository;
 
-    public TasksController(TasksService tasksService) {
-        this.tasksService = tasksService;
+    public TasksController(TasksRepository tasksRepository) {
+        this.tasksRepository = tasksRepository;
     }
 
+    /*
     @GetMapping
     public List<Task> getAll() {
         logger.info("Fetching all tasks");
 
         return tasksService.getAll();
     }
+     */
 
     @PostMapping
     public Task addOne(@RequestBody Task newTask) {
         logger.info("New task text: " + newTask.getText());
 
-        return tasksService.addOne(newTask.getText());
+        //return tasksRepository.addOne(newTask);
+        return tasksRepository.addOne(newTask);
     }
 
+    /*
     @DeleteMapping
-    public ResponseEntity deleteOne(@RequestParam String taskId) {
-        logger.info("Deleting task with id: " + taskId);
+    public ResponseEntity deleteOne(@RequestBody Task taskToDelete) {
+        logger.info("Deleting task with id: " + taskToDelete.getId());
 
-        tasksService.deleteOne(taskId);
+        tasksService.deleteOne(taskToDelete.getId());
         return ResponseEntity
                 .noContent()
                 .build();
@@ -50,4 +54,5 @@ public class TasksController {
 
         return tasksService.updateOne(updatedTask);
     }
+     */
 }

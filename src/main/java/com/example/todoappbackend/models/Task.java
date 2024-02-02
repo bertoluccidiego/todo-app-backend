@@ -4,16 +4,20 @@ import java.util.Objects;
 
 public class Task {
 
-    private final String id;
+    private int id;
     private String text;
 
-    public Task(String id, String text) {
+    public Task(int id, String text) {
         this.id = id;
         this.text = text;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getText() {
