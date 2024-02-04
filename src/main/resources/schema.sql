@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS tasks (
+CREATE TABLE IF NOT EXISTS task (
    id SERIAL PRIMARY KEY,
    text varchar(100) NOT NULL
 );

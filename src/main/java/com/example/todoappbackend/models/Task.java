@@ -1,17 +1,18 @@
 package com.example.todoappbackend.models;
 
-import java.util.Objects;
+import org.springframework.data.annotation.Id;
 
 public class Task {
 
-    private int id;
+    @Id
+    private long id;
     private String text;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -20,25 +20,24 @@ public class TasksController {
     }
 
     @GetMapping
-    public List<Task> getAll() {
+    public Iterable<Task> getAll() {
         logger.info("Fetching all tasks");
 
-        return tasksRepository.getAll();
+        return tasksRepository.findAll();
     }
 
     @PostMapping
     public Task addOne(@RequestBody Task newTask) {
         logger.info("New task text: " + newTask.getText());
 
-        //return tasksRepository.addOne(newTask);
-        return tasksRepository.addOne(newTask);
+        return tasksRepository.save(newTask);
     }
 
     @DeleteMapping
     public ResponseEntity deleteOne(@RequestBody Task taskToDelete) {
         logger.info("Deleting task with id: " + taskToDelete.getId());
 
-        tasksRepository.deleteOne(taskToDelete);
+        tasksRepository.deleteById(taskToDelete.getId());
         return ResponseEntity
                 .noContent()
                 .build();
@@ -49,6 +48,6 @@ public class TasksController {
         logger.info("Updating the task with id: " + updatedTask.getId()
                         + " with the text: \"" + updatedTask.getText() + "\"");
 
-        return tasksRepository.updateOne(updatedTask);
+        return tasksRepository.save(updatedTask);
     }
 }
